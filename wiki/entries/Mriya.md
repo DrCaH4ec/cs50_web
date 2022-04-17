@@ -1,0 +1,7 @@
+##The Antonov An-225 Mriya
+
+The Antonov An-225 Mriya (Ukrainian: Антонов Ан-225 Мрія, lit. ''dream' or 'inspiration''; NATO reporting name: Cossack) was a strategic airlift cargo aircraft designed in the 1980s by the Antonov Design Bureau in the Soviet Union. It was originally developed as an enlargement of the Antonov An-124 to transport Buran-class orbiters, and only one example was ever completed. After successfully fulfilling its military missions, the aircraft was mothballed for eight years. It was then refurbished and reintroduced into commercial operation with Antonov Airlines, carrying oversized payloads. While a second airframe with a slightly different configuration was partially built, construction was halted more than once due to a lack of funding and interest. This second aircraft was last brought up to 60–70% completion in 2009.
+
+With a maximum takeoff weight of 640 tonnes (705 short tons), the An-225 held several records, including heaviest aircraft ever built and largest wingspan of any aircraft in operational service. The Mriya attracted a high degree of public interest, attaining a global following due to its size and its uniqueness. People frequently visited airports to see its scheduled arrivals and departures.
+
+The completed An-225 was destroyed in the Battle of Antonov Airport during the 2022 Russian invasion of Ukraine.

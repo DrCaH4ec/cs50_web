@@ -1,0 +1,39 @@
+{% extends "encyclopedia/layout.html" %}
+
+{% block title %}
+    Encyclopedia
+{% endblock %}
+
+{% block body %}
+    <style>
+    textarea {
+      resize: none;
+      width: 1420px;
+      height: 710px;
+    }
+    input[type=submit] {
+        width: 100px;
+        height: 40px;
+    }
+    </style>
+    
+    <font size="+3">Create New Article</font> 
+    
+    <div>
+        <input type="submit" form="add_entry" height="100px" value="Add page">
+    </div>
+    
+    <br>
+
+    <form id="add_entry" action="{% url 'add_entry' %}" method="post">
+
+        {% csrf_token %}
+        <input type="text" id="name" name="title" value="{{ title }}" placeholder="Enter article title" size="150px" required>
+        <br>
+        {{ msg }}
+        <br>
+
+        <textarea name="content" placeholder="Enter text (min 50 characters)" minlength="50" required>{{ content }}</textarea>
+    </form>
+
+{% endblock %}
