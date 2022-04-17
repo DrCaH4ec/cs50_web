@@ -1,0 +1,92 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+    <h2>{{ page_title }}</h2>
+
+    <style>
+        .main {
+            border: 1px solid black;
+            border-radius: 5px;
+            margin: 12px 12px 12px 12px;
+        }
+
+        img:hover {
+            transform: scale(1.05);
+        }
+    </style>
+
+    {% comment %} {% for listing in listings %}
+        <table class="main">
+            <tr>
+                <td style="width: 600px; text-align: center; margin: 12px 12px 12px 12px;">
+                    <a href="{% url 'view_listing' listing.id %}">
+                        <img src="{{ listing.img }}" alt="{{ listing.title }}" width=auto height="300">
+                    </a>
+                </td>
+                <td style="width: 1100px;">
+                    <table style="height: 300px; width: 1100px; ">
+                        <tr style="vertical-align: top;">
+                            <td>
+                                {% if listing.is_active %}
+                                    <h1>{{ listing.title }}</h1>
+                                {% else %}
+                                    <h1>{{ listing.title }} (CLOSED)</h1>
+                                {% endif %}
+
+                                <b>Price: ${{ listing.start_bid }}</b>
+                            <td>
+                        </tr>
+                        <tr style="vertical-align: top;">
+                            <td>
+                                {{ listing.desc }}
+                            <td>
+                        </tr>
+                        <tr style="vertical-align: bottom;">
+                            <td>
+                                Created {{ listing.publ_date }}
+                            <td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        </table> {% endcomment %}
+
+
+    {% for listing, bid in data %}
+        <table class="main">
+            <tr>
+                <td style="width: 600px; text-align: center; margin: 12px 12px 12px 12px;">
+                    <a href="{% url 'view_listing' listing.id %}">
+                        <img src="{{ listing.img }}" alt="{{ listing.title }}" width=auto height="300">
+                    </a>
+                </td>
+                <td style="width: 1100px;">
+                    <table style="height: 300px; width: 1100px; ">
+                        <tr style="vertical-align: top;">
+                            <td>
+                                {% if listing.is_active %}
+                                    <h1>{{ listing.title }}</h1>
+                                {% else %}
+                                    <h1>{{ listing.title }} (CLOSED)</h1>
+                                {% endif %}
+
+                                {% comment %} <b>Price: ${{ listing.start_bid }}</b> {% endcomment %}
+                                <b>Price: ${{ bid }}</b>
+                            <td>
+                        </tr>
+                        <tr style="vertical-align: top;">
+                            <td>
+                                {{ listing.desc }}
+                            <td>
+                        </tr>
+                        <tr style="vertical-align: bottom;">
+                            <td>
+                                Created {{ listing.publ_date }}
+                            <td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        </table>
+    {% endfor %}
+{% endblock %}

@@ -1,0 +1,46 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+    <h2>Create listing</h2>
+
+    <style>
+        .main {
+            border: 1px solid black;
+            border-radius: 5px;
+            margin: 12px 12px 12px 12px;
+        }
+        textarea {
+            resize: none;
+            width: 1100px;
+            height: 150px;
+        }
+    </style>
+
+    <form action="{% url 'create_listing' %}" method="post">
+        {% csrf_token %}
+
+        <h3>Title:</h3>
+        {{ create_listing_form.title }}
+        <br><br>
+
+        <h3>Description:</h3>
+        {{ create_listing_form.desc }}
+        <br><br>
+
+        <h3>Link for image:</h3>
+        {{ create_listing_form.img }}
+        <br><br>
+        
+        <h3>Start bid:</h3>
+        {{ create_listing_form.start_bid }}
+        <br><br>
+
+        <h3>Category:</h3>
+        {{ create_listing_form.category }}
+
+        <br><br>
+        <input type="submit" class="button-7" style="font-size:18px;" value="Submit">
+
+    </form>
+
+{% endblock %}

@@ -1,0 +1,111 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+    <style>
+        .main {
+            border: 1px solid black;
+            border-radius: 5px;
+            margin: 12px 12px 12px 12px;
+        }
+
+        textarea {
+            resize: none;
+            width: 1100px;
+            height: 150px;
+        }
+    </style>
+
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert {{ message.tags }} alert-dismissible" role="alert" >
+                <strong>{{message}}<strong>
+            </div>
+        {% endfor %}    
+    {% endif %}
+
+    <div style="margin-bottom: 20px">
+
+        {% if listing.is_active %}
+            <h1>{{ listing.title }}</h1>
+        {% else %}
+            <h1>{{ listing.title }} (CLOSED)</h1>
+        {% endif %}
+
+        <form action="{% url 'change_watchlist' listing.id %}" method="post" style="display: inline-block;">
+            {% csrf_token %}
+            <button class="button-7" style="font-size: 16px;" type="submit">
+                {% if in_watchlist %}
+                    Remove from watchlist
+                {% else %}
+                    Add to watchlist
+                {% endif %}
+            </button>
+        </form>
+
+        {% if viewer == listing.owner.username %}
+            <form action="{% url 'change_status' listing.id %}" method="post" style="display: inline-block;">
+                {% csrf_token %}
+                {% if listing.is_active %}
+                    <button class="button-7" style="font-size: 16px;" type="submit">Close</button>
+                {% else %}
+                    <button class="button-7" style="font-size: 16px;" type="submit">Reopen</button>
+                {% endif %}
+            </form>
+        {% endif %}
+    </div>
+
+    <img src="{{ listing.img }}" alt="{{ listing.title }}" width=auto height="500">
+    <br><br>
+    <p>{{ listing.desc }}</p>
+
+    <h1>${{ listing_bid }}</h1>
+    <br>
+    <p>
+        {{ bids_num }} bid(s) so far. 
+        
+        {% if viewer == last_bid_owner %}
+            Your bid is the current bid.
+        {% endif %}
+    </p>
+
+    {% if listing.is_active %}
+        <form action="{% url 'add_bid' listing.id %}" method="post">
+            {% csrf_token %}
+            <input type="number" name="bid" placeholder="Enter your bid in $" min="1" step="1" size="50px" required>
+            <button class="button-7" type="submit">Place Bid</button>
+        </form>
+    {% endif %}
+
+    <br>
+    <h2>Comments:</h2>
+
+    <form action="{% url 'add_comment' listing.id %}" method="post">
+        {% csrf_token %}
+        <textarea name="content" placeholder="Enter your comment" required></textarea>
+        <div style="text-align: right; margin: 0px 725px 0px 0px;">
+            <button class="button-7" style="font-size: 16px;" type="submit">Send</button>
+        </div>
+    </form>
+
+
+    {% for comment in comments %}
+        <table class="main">
+            <tr>
+                <td style="width: 1100px; margin: 12px 12px 12px 12px;">
+                    <a>{{ comment.date_added }}</a>
+                    <h4>User: {{ comment.user.username }}</h4>
+                    <p>{{ comment.body }}</p>
+                    {% if comment.user.username == viewer %}
+                        <form action="{% url 'del_comment' listing.id comment.id %}" method="post">
+                            {% csrf_token %}
+                            <button class="button-7" style="font-size: 12px; float: right" type="submit">Remove</button>
+                        </form>
+                    {% endif %}
+                </td>
+            </tr>
+            
+        </table>
+    {% endfor %}
+
+
+{% endblock %}
